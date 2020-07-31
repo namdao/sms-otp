@@ -1,6 +1,6 @@
 # E-SMS MODULE
 
-E-SMS Modules for mobiles project of LOGIVAN
+E-SMS Modules for mobiles project with firebase react native
 
 ## Getting Started
 
@@ -12,6 +12,7 @@ Dependencies
 react-native-tab-view
 react-native-animatable
 react-native-device-info
+@react-native-firebase/auth
 axios
 libphonenumber-js
 lodash
