@@ -1,6 +1,6 @@
 {
   "name": "@namdao/sms-otp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,6 @@
     "react-native-tab-view": "*",
     "@react-native-firebase/auth": "*",
     "axios": "*",
-    "libphonenumber-js": "*"
   },
   "dependencies": {
     "react-native-tab-view": "2.13.0",
