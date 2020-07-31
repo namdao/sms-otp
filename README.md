@@ -1,16 +1,16 @@
 
-# react-native-logivan-mobile-sms-otp
+# emobile-sms-otp-react-native
 
 ## Getting started
 
-`$ npm install logivan/logivan-mobile-sms-otp --save`
+`$ npm install namdao/sms-otp`
 
 ## rn > 0.60 autolink
 ## rn < 0.60:
 
 ### Mostly automatic installation
 
-`$ react-native link @logivan/mobile-sms-otp `
+`$ react-native link namdao/sms-otp `
 
 ### Manual installation
 
@@ -47,7 +47,7 @@ don't need
 | renderCustomFooter | function | render custom footer of e-sms module (usually for privacy policy link)                                                                                         |
 
 ```javascript
-import { OTP } from '@logivan/mobile-sms-otp';
+import { OTP } from 'sms-otp';
 
 setOTPRef = ref => {
   this.Otp = ref
