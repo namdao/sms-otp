@@ -31,15 +31,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/namdao/sms-otp"
+    "url": "https://github.com/namdao/sms-otp-react-native"
   },
   "keywords": [
     "react-native"
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/namdao/sms-otp/issues"
+    "url": "https://github.com/namdao/sms-otp-react-native/issues"
   },
-  "homepage": "https://github.com/namdao/sms-otp",
+  "homepage": "https://github.com/namdao/sms-otp-react-native",
   "author": "namdnh"
 }
