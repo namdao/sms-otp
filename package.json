@@ -1,6 +1,6 @@
 {
   "name": "@namdao/sms-otp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,11 +12,13 @@
     "react-native-animatable": "*",
     "react-native-tab-view": "*",
     "@react-native-firebase/auth": "*",
+    "libphonenumber-js": "*",
     "axios": "*"
   },
   "dependencies": {
     "react-native-tab-view": "2.13.0",
-    "@react-native-firebase/auth": "7.1.0"
+    "@react-native-firebase/auth": "7.1.0",
+    "libphonenumber-js": "1.7.55"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
