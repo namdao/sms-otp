@@ -1,0 +1,45 @@
+{
+  "name": "@namdao/sms-otp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-animatable": "*",
+    "react-native-tab-view": "*",
+    "@react-native-firebase/auth": "*",
+    "axios": "*",
+    "libphonenumber-js": "*"
+  },
+  "dependencies": {
+    "react-native-tab-view": "2.13.0",
+    "@react-native-firebase/auth": "7.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/runtime": "^7.7.7",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.8.0",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.57.0",
+    "react-test-renderer": "16.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/namdao/sms-otp"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namdao/sms-otp/issues"
+  },
+  "homepage": "https://github.com/namdao/sms-otp",
+  "author": "namdnh"
+}
