@@ -6,6 +6,7 @@ import { TabView } from 'react-native-tab-view';
  * components
  */
 import OTPScreen from './otp';
+import OTPSCreenFirebase from './otp/otpFirebase';
 import PhoneNumberScreen from './phonenumber';
 /**
  * utils & constants
@@ -63,6 +64,8 @@ class App extends Component {
 
   renderScene = ({ route }) => {
     const { ...rest } = this.state;
+    const { usingFirebase = false } = this.props;
+    const ScreenOtp = usingFirebase ? OTPSCreenFirebase : OTPScreen;
     switch (route.key) {
       case SCREEN_PHONE_NUMBER:
         return (
@@ -72,7 +75,7 @@ class App extends Component {
           />
         );
       case SCREEN_OTP:
-        return <OTPScreen {...rest} onIndexChange={this.onIndexChange} />;
+        return <ScreenOtp {...rest} onIndexChange={this.onIndexChange} />;
       default:
         return null;
     }
