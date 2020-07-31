@@ -12,7 +12,7 @@
     "react-native-animatable": "*",
     "react-native-tab-view": "*",
     "@react-native-firebase/auth": "*",
-    "axios": "*",
+    "axios": "*"
   },
   "dependencies": {
     "react-native-tab-view": "2.13.0",
