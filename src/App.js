@@ -46,6 +46,8 @@ class App extends Component {
     const { index } = this.state;
     if (index === 0) {
       this.setState({ isVisibleOtp: false });
+      const { handleBack } = this.props;
+      handleBack && handleBack();
       return;
     }
     if (index === 1) {

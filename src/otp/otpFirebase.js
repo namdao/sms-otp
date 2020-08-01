@@ -26,7 +26,6 @@ class OTPScreen extends Component {
     };
     this.countDown = null;
     this.modal = null;
-    this.confirmation = null;
     this.debouncedOnSubmit = debounce(this.onSubmit, 200);
     this.debouncedOnResendOTP = debounce(this.onResendOTP, 200);
   }
@@ -49,13 +48,13 @@ class OTPScreen extends Component {
           isCodeFilled: false,
           isLoading: false,
           errorMessage: '',
-        },
-        this.onResend
+        }
       );
+      this.onResendOTP()
     }
   }
   // eslint-disable-next-line no-unused-vars
-  shouldComponentUpdate(_, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     const { isCodeFilled, isLoading, isCountingDone, errorMessage } = this.state;
     const {
       isCodeFilled: nextIsCodeFilled,
@@ -63,11 +62,15 @@ class OTPScreen extends Component {
       isCountingDone: nextIsCountingDone,
       errorMessage: nextMessage,
     } = nextState;
-    return (
-      isCodeFilled !== nextIsCodeFilled ||
+    const { currentPhoneNumber: nextPhoneNumber } = nextProps;
+    const { currentPhoneNumber } = this.props;
+    const validState = (isCodeFilled !== nextIsCodeFilled ||
       isLoading !== nextIsLoading ||
       isCountingDone !== nextIsCountingDone ||
-      errorMessage !== nextMessage
+      errorMessage !== nextMessage);
+    const validProps = currentPhoneNumber !== nextPhoneNumber
+    return (
+      validState || validProps
     );
   }
 
@@ -81,13 +84,17 @@ class OTPScreen extends Component {
     if (!isCodeFilled) return;
 
     this.startLoading();
-    verifyOTP(this.confirmation, code, this.afterSubmitCode);
+    verifyOTP(code, this.afterSubmitCode);
   };
 
-  afterSubmitCode = status => {
+  afterSubmitCode = ({ status, error, resultConfirm }) => {
     if (!status) {
-      this.setState({ errorMessage: 'Otp không chính xác' });
+      this.setState({ errorMessage: JSON.stringify(error) });
+    } else {
+      const { onOTPSuccess } = AuthenConfig.getConfig();
+      onOTPSuccess(resultConfirm);
     }
+    this.endLoading();
   }
 
   sendOTP = () => {
@@ -97,9 +104,13 @@ class OTPScreen extends Component {
     businessSendOTP(currentPhoneNumber, this.afterSendOtp);
   };
 
-  afterSendOtp = (confirmation) => {
-    this.confirmation = confirmation;
-    this.endLoading();
+  afterSendOtp = ({ status, error }) => {
+    if (!status) {
+      Alert.alert(JSON.stringify(error));
+    }
+    setTimeout(() => {
+      this.endLoading();
+    }, 500);
   }
 
   onSendOTPFirstTime = () => {
@@ -114,7 +125,6 @@ class OTPScreen extends Component {
       if (this.modal) {
         this.modal.closeModal();
       }
-      this.startLoading();
       this.startCount();
       this.sendOTP();
     }
@@ -142,7 +152,9 @@ class OTPScreen extends Component {
   };
 
   startLoading = () => {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true }, () => {
+      this.startCount(0);
+    });
   };
 
   endLoading = () => {
@@ -186,7 +198,7 @@ class OTPScreen extends Component {
             onPress={this.debouncedOnSubmit}
             style={[styles.submitButton, styles.mt15, { backgroundColor: colorsMain }]}
           >
-            <Text style={styles.whiteText}>Tiếp theo</Text>
+            <Text style={styles.whiteText}>Xác nhận</Text>
           </TouchableOpacity>
           <Countdown
             onCountingStart={this.onCountingStart}

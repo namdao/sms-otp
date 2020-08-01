@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
   otpInputContainer: {
     alignSelf: 'center',
-    width: width.res255,
+    width: '100%',
     height: width.res45,
     marginTop: width.res25,
   },
@@ -44,6 +44,7 @@ export default StyleSheet.create({
   bottom: {
     flex: 1,
     justifyContent: 'flex-end',
+    margin: width.res15,
   },
   mt15: {
     marginTop: 15,

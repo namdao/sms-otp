@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
 import auth from '@react-native-firebase/auth';
-import AuthenConfig from '../AuthenConfig';
 
 export const withOTPFirebaseBusinessLogic = WrappedComponent => {
   class OTPBusinessLogic extends Component {
+    confirmation = null;
 
-    sendOTP = async (phoneNumber, callback = () => null, hash) => {
+    sendOTP = async (phoneNumber, callback = () => null, resend = false) => {
       try {
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-        return callback(confirmation);
+        this.confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+        return callback({ status: true });
       } catch (error) {
-        throw error;
+        callback({ status: false, error });
       }
     };
 
-    verifyOTP = async (confirm, otpCode, callback = () => null) => {
+    verifyOTP = async (otpCode, callback = () => null) => {
       try {
-        const resultConfirm = await confirm.confirm(otpCode);
-        const { onOTPSuccess } = AuthenConfig.getConfig();
-        onOTPSuccess(resultConfirm);
+        const resultConfirm = await this.confirmation.confirm(otpCode);
+        callback({ status: true, resultConfirm });
       } catch (error) {
-        console.log('Invalid code.');
-        callback(false);
+        callback({ status: false, error });
       }
     };
 
