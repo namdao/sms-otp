@@ -5,6 +5,9 @@ export const withOTPFirebaseBusinessLogic = WrappedComponent => {
   class OTPBusinessLogic extends Component {
     confirmation = null;
 
+    componentWillUnmount() {
+      this.subscriber();
+    }
     sendOTP = async (phoneNumber, callback = () => null, resend = false) => {
       try {
         this.confirmation = await auth().signInWithPhoneNumber(phoneNumber);
@@ -23,8 +26,12 @@ export const withOTPFirebaseBusinessLogic = WrappedComponent => {
       }
     };
 
+    subscriber = (onAuthStateChanged) => {
+      auth().onAuthStateChanged(onAuthStateChanged)
+    }
+
     render() {
-      return <WrappedComponent {...this.props} sendOTP={this.sendOTP} verifyOTP={this.verifyOTP} />;
+      return <WrappedComponent {...this.props} sendOTP={this.sendOTP} verifyOTP={this.verifyOTP} subscriber={this.subscriber} />;
     }
   }
 

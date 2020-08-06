@@ -30,8 +30,15 @@ class OTPScreen extends Component {
     this.debouncedOnResendOTP = debounce(this.onResendOTP, 200);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.onSendOTPFirstTime();
+    const { subscriber } = this.props;
+    const listenerChange = (user) => {
+      if (user && Platform.OS === 'android') {
+        this.callBackSuccess(user);
+      }
+    }
+    subscriber(listenerChange);
   }
 
   componentDidUpdate(prevProps) {
@@ -91,10 +98,14 @@ class OTPScreen extends Component {
     if (!status) {
       this.setState({ errorMessage: JSON.stringify(error) });
     } else {
-      const { onOTPSuccess } = AuthenConfig.getConfig();
-      onOTPSuccess(resultConfirm);
+      this.callBackSuccess(resultConfirm);
     }
     this.endLoading();
+  }
+
+  callBackSuccess = (data) => {
+    const { onOTPSuccess } = AuthenConfig.getConfig();
+    onOTPSuccess(data);
   }
 
   sendOTP = () => {
